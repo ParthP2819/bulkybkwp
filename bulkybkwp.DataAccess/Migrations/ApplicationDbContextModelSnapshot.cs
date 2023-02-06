@@ -7,7 +7,7 @@ using bulkybkwp.DataAccess;
 
 #nullable disable
 
-namespace bulkybkw.Migrations
+namespace bulkybkwp.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot

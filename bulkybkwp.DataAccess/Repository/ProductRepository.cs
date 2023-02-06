@@ -25,7 +25,7 @@ namespace bulkybkwp.DataAccess.Repository
             var objFromDb = _db.products.FirstOrDefault(u => u.Id == obj.Id);
             if (objFromDb != null)  
             {
-                objFromDb.Title= obj.Title;
+                objFromDb.Title= obj.Title; 
                 objFromDb.ISBN = obj.ISBN;
                 objFromDb.Price = obj.Price;
                 objFromDb.Price50 = obj.Price50;

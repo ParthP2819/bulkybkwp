@@ -3,6 +3,7 @@ using bulkybkwp.DataAccess;
 using bulkybkwp.DataAccess.Repository;
 using bulkybkwp.DataAccess.Repository.IRepository;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,6 +29,7 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+
 
 app.UseRouting();
 
