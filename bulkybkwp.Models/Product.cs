@@ -19,12 +19,13 @@ namespace bulkybkwp.Models
         public string ISBN { get; set; }
         [Required]
         public string Author { get; set; }
-        [Required]
-        [Range(1,10000)]
+        [Required] 
+        [Range(1, 10000)]
+        [Display(Name = "List Price")]
         public double ListPrice { get; set; }
         [Required]
-        [Display(Name = "List Price")]
         [Range(1, 10000)]
+        [Display(Name = "Price for 1-50")]
         public double Price { get; set; }
         [Required]
         [Display(Name = "Price For 50-100")]

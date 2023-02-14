@@ -4,6 +4,9 @@ using bulkybkwp.DataAccess.Repository;
 using bulkybkwp.DataAccess.Repository.IRepository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using bulkybkwp.Utility;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,7 +17,14 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseMySql(
     builder.Configuration.GetConnectionString("DefaultString"), 
     ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("DefaultString")
     )));
+
+builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddDefaultTokenProviders()
+    .AddEntityFrameworkStores<ApplicationDbContext>();
+
+//builder.Services.AddDefaultIdentity<IdentityUser>()
+//    .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddSingleton<IEmailSender, EmailSender>();
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 
 var app = builder.Build();
@@ -32,9 +42,10 @@ app.UseStaticFiles();
 
 
 app.UseRouting();
+app.UseAuthentication();;
 
 app.UseAuthorization();
-
+app.MapRazorPages();
 app.MapControllerRoute(
     name: "default",
     pattern: "{area=Customer}/{controller=Home}/{action=Index}/{id?}");

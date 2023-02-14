@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace bulkybkw.Areas.Admin.Controllers
 
 {
+    [Area("Admin")]
     public class CoverTypeController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

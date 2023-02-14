@@ -37,13 +37,13 @@ namespace bulkybkw.DataAccess.Repository
         {
             IQueryable<T> query = dbset;
             query = query.Where(filter);
-            //if (includeProperties != null)
-            //{
-            //    foreach (var includeProp in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
-            //    {
-            //        query = query.Include(includeProp);
-            //    }
-            //}
+            if (includeProperties != null)
+            {
+                foreach (var includeProp in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    query = query.Include(includeProp);
+                }
+            }
             return query.FirstOrDefault();
         }
 

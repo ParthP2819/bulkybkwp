@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 namespace bulkybkw.Areas.Admin.Controllers
 
 {
+    [Area("Admin")]
     public class ProductController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -62,7 +63,8 @@ namespace bulkybkw.Areas.Admin.Controllers
         }
 
         //POST Action Method for Upsert
-        [HttpPost]  
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Upsert(ProductVM obj, IFormFile? file)
         {
             if (ModelState.IsValid)
@@ -87,7 +89,7 @@ namespace bulkybkw.Areas.Admin.Controllers
                     {
                         file.CopyTo(fileStreams);
                     }
-                    obj.Product.ImageUrl = wwwRootPath + @"\images\products\" + fileName + extension;
+                    obj.Product.ImageUrl = /*wwwRootPath +*/ @"\images\products\" + fileName + extension;
                 }
                 if (obj.Product.Id == 0)
                 {

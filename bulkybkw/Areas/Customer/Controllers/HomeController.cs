@@ -5,6 +5,7 @@ using System.Diagnostics;
 
 namespace bulkybkw.Areas.Customer.Controllers
 {
+    [Area("Customer")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -23,7 +24,17 @@ namespace bulkybkw.Areas.Customer.Controllers
             return View(productList);
         }
 
-        public IActionResult Privacy()
+        public IActionResult Details(int id)
+        {
+            ShoppingCart cartObj = new()
+            {
+                Count = 1,
+                Product = _unitOfWork.Product.GetFristOrDefault(u => u.Id == id, includeProperties: "Category,CoverType"),
+            };
+			return View(cartObj);
+		}
+
+		public IActionResult Privacy()
         {
             return View();
         }
